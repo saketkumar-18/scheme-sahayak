@@ -1,0 +1,334 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-09-01",
+  "profile_fields": ["age", "gender", "annual_income", "social_category", "state", "occupation", "is_landholding_farmer", "owns_pucca_house", "has_kutcha_or_homeless", "is_bpl", "is_student", "education_level", "is_govt_employee", "pays_income_tax", "family_member_govt_employee", "is_married", "girl_below_10_in_family", "family_size", "is_street_vendor", "has_vending_certificate", "is_artisan_or_tradeworker", "vishwakarma_trade", "wants_business_loan", "senior_70_plus_in_family", "rural_or_urban", "disability", "widow", "bank_account", "aadhaar_linked_bank"],
+  "schemes": [
+    {
+      "id": "pmay-u-2-0",
+      "name": "PM Awas Yojana – Urban 2.0 (PMAY-U 2.0)",
+      "ministry": "Ministry of Housing and Urban Affairs",
+      "category": "housing",
+      "benefit": "Interest subsidy up to ₹1.80 lakh on home loans (EWS/LIG) under ISS vertical; affordable housing options in cities.",
+      "summary": "Housing assistance for urban homeless and EWS/LIG families — interest subsidy on housing loans and affordable houses through PMAY-U 2.0 (2024–2030).",
+      "rules": [
+        {"field": "rural_or_urban", "op": "eq", "value": "urban", "note": "PMAY-U covers urban areas only"},
+        {"field": "owns_pucca_house", "op": "eq", "value": false, "note": "Beneficiary family should not own a pucca house anywhere in India"},
+        {"field": "annual_income", "op": "lte", "value": 900000, "note": "EWS: up to ₹3L; LIG: ₹3–6L; MIG: ₹6–9L (PMAY-U 2.0 MIG ceiling ₹9L)"}
+      ],
+      "application_steps": [
+        "Visit pmaymis.gov.in (PMAY-U 2.0 beneficiary portal) and click 'Citizen Assessment' / new registration",
+        "Enter Aadhaar, name, and family details; select category (EWS/LIG) by income",
+        "Choose vertical: ISS (interest subsidy on home loan) or Affordable Housing in Partnership (AHP)",
+        "Submit; note the application ID and track status on pmaymis.gov.in",
+        "For ISS subsidy approach any Scheduled Commercial Bank / HFC with the PMAY application ID"
+      ],
+      "docs": ["Aadhaar card", "Income certificate", "Identity proof", "Address proof", "Bank passbook"],
+      "sources": [
+        {"name": "IDBI Bank — PMAY-U 2.0 ISS FAQ (official bank PDF)", "url": "https://www.idbi.bank.in/pdf/FAQ-PMAY-URBAN-2.0-ISS.pdf"},
+        {"name": "PMAY-U official FAQ — pmay-urban.gov.in", "url": "https://pmay-urban.gov.in/faq"}
+      ]
+    },
+    {
+      "id": "pmay-g",
+      "name": "PM Awas Yojana – Gramin (PMAY-G)",
+      "ministry": "Ministry of Rural Development",
+      "category": "housing",
+      "benefit": "Financial assistance for construction of a pucca house (~₹1.2–2 lakh depending on state/terrain; NE states get 90:10 central share).",
+      "summary": "Pucca house for rural households who are homeless or living in kutcha houses, identified via SECC / Awaas+ lists.",
+      "rules": [
+        {"field": "rural_or_urban", "op": "eq", "value": "rural", "note": "PMAY-G covers rural areas only"},
+        {"field": "has_kutcha_or_homeless", "op": "eq", "value": true, "note": "Household must be houseless or living in a kutcha/dilapidated house (SECC-based identification)"},
+        {"field": "owns_pucca_house", "op": "eq", "value": false, "note": "No family member should own a pucca house"}
+      ],
+      "application_steps": [
+        "Check name in SECC-2011 permanent wait list / Awaas+ list with your Gram Panchayat",
+        "If not listed, apply to the Gram Panchayat for inclusion in the waiting list (survey-based)",
+        "Verification by Gram Panchayat + Block officials; geo-tagged construction after sanction",
+        "Funds in 3–4 installments directly to Aadhaar-linked bank account via PFMS/AwaasSoft",
+        "Track on pmayg.nic.in → 'Track Your Application'"
+      ],
+      "docs": ["Aadhaar card", "Bank passbook (Aadhaar-linked)", "Job card / SECC acknowledgement", "Ration card"],
+      "sources": [
+        {"name": "PMAY-G official portal — pmayg.nic.in", "url": "https://pmayg.nic.in"},
+        {"name": "PIB — PMAY-G guidelines", "url": "https://www.pib.gov.in"}
+      ]
+    },
+    {
+      "id": "ab-pmjay",
+      "name": "Ayushman Bharat – PM Jan Arogya Yojana (AB-PMJAY)",
+      "ministry": "Ministry of Health and Family Welfare / NHA",
+      "category": "health",
+      "benefit": "₹5 lakh health cover per family per year for secondary/tertiary hospitalisation at empanelled public/private hospitals — fully cashless.",
+      "summary": "World's largest health assurance scheme. Eligibility based on SECC 2011 deprivation/occupational criteria (bottom ~40%); also covers all senior citizens aged 70+ (Ayushman Vay Vandana) irrespective of income.",
+      "rules": [
+        {"any_of": [
+          {"field": "is_bpl", "op": "eq", "value": true, "note": "SECC-2011 deprivation-based eligibility for poor families"},
+          {"field": "senior_70_plus_in_family", "op": "eq", "value": true, "note": "Ayushman Vay Vandana: every senior citizen aged 70+ gets the cover irrespective of income"}
+        ], "logic": "at_least_one"}
+      ],
+      "application_steps": [
+        "Check name in SECC-2011 list at beneficiary.nha.gov.in or call 14500 (national helpline)",
+        "Confirm/verify via Aadhaar e-KYC at the same portal or nearest CSC (Common Service Centre)",
+        "Download/verify Ayushman card from beneficiary.nha.gov.in or Umang app",
+        "Use card at any empanelled hospital Ayushman Mitra help desk — cashless treatment",
+        "Grievance: 14500 or state health agency"
+      ],
+      "docs": ["Aadhaar card", "Ration card (optional)", "SECC entry acknowledgement (optional)"],
+      "sources": [
+        {"name": "NHA beneficiary portal — beneficiary.nha.gov.in", "url": "https://beneficiary.nha.gov.in"},
+        {"name": "PIB — Ayushman Vay Vandana (70+ cover)", "url": "https://www.pib.gov.in"}
+      ]
+    },
+    {
+      "id": "pm-kisan",
+      "name": "PM Kisan Samman Nidhi (PM-KISAN)",
+      "ministry": "Ministry of Agriculture and Farmers Welfare",
+      "category": "agriculture",
+      "benefit": "₹6,000 per year (3 installments of ₹2,000) directly into landholder farmer families' bank accounts.",
+      "summary": "Income support for all landholding farmer families, subject to exclusions (institutional landholders, govt employees, income-tax payers, etc.).",
+      "rules": [
+        {"field": "is_landholding_farmer", "op": "eq", "value": true, "note": "Cultivable landholding is primary eligibility (family = husband, wife, minor children)"},
+        {"field": "is_govt_employee", "op": "eq", "value": false, "note": "Exclusion: former/present holders of constitutional posts, gazetted officers, regular government employees"},
+        {"field": "pays_income_tax", "op": "eq", "value": false, "note": "Exclusion: income tax payers in last assessment year"},
+        {"field": "family_member_govt_employee", "op": "eq", "value": false, "note": "Exclusion applies if ANY family member falls in exclusion categories"}
+      ],
+      "application_steps": [
+        "Farmers can register on pmkisan.gov.in → 'New Farmer Registration'",
+        "Enter Aadhaar, land record (Khatauni/Kisan Bahi/pattadar passbook), bank details",
+        "eKYC via Aadhaar OTP at CSC or on pmkisan.gov.in (mandatory before credit)",
+        "Land record verification by state revenue/patwari; corrections via helpline",
+        "Track: pmkisan.gov.in → 'Beneficiary Status'"
+      ],
+      "docs": ["Aadhaar card", "Land record (Khatauni/pattadar passbook)", "Bank passbook"],
+      "sources": [
+        {"name": "PM-KISAN Revised Operational Guidelines (official PDF)", "url": "https://pmkisan.gov.in/Documents/RevisedPM-KISANOperationalGuidelines(English).pdf"},
+        {"name": "PIB — PM-KISAN eligibility (PRID 2146932)", "url": "https://pib.gov.in/PressReleasePage.aspx?PRID=2146932"}
+      ]
+    },
+    {
+      "id": "pms-sc",
+      "name": "Post Matric Scholarship for SC Students (PMS-SC)",
+      "ministry": "Ministry of Social Justice and Empowerment",
+      "category": "education",
+      "benefit": "Full tuition fee reimbursement + monthly maintenance allowance for post-matric courses (Class 11 onwards), paid via DBT.",
+      "summary": "Centrally Sponsored Scholarship for SC students in recognised post-matriculation courses; family income from all sources must not exceed ₹2.5 lakh/year.",
+      "rules": [
+        {"field": "social_category", "op": "eq", "value": "SC", "note": "Applicant must belong to Scheduled Caste"},
+        {"field": "is_student", "op": "eq", "value": true, "note": "Must be enrolled in a recognised post-matriculation course (Class 11 and above)"},
+        {"field": "annual_income", "op": "lte", "value": 250000, "note": "Family income from all sources ≤ ₹2.5 lakh/year"}
+      ],
+      "application_steps": [
+        "Register on the National Scholarship Portal (NSP) — scholarships.gov.in → 'New Registration'",
+        "Fill academic details, course, institution; generate 'Registration ID'",
+        "Upload income & caste certificate issued by competent authority",
+        "Institution + district verification on NSP; then PFMS DBT to Aadhaar-linked bank",
+        "Track application on NSP 'Check Your Status'"
+      ],
+      "docs": ["Caste certificate (SC)", "Income certificate ≤₹2.5L", "Marksheet of last exam", "Bank passbook (Aadhaar-linked)", "Bonafide certificate"],
+      "sources": [
+        {"name": "National Scholarship Portal — scholarships.gov.in (scheme guidelines)", "url": "https://scholarships.gov.in"},
+        {"name": "PMS-SC scheme page (DoSEJ guidelines PDF)", "url": "https://socialjustice.gov.in"}
+      ]
+    },
+    {
+      "id": "pms-obc",
+      "name": "Post Matric Scholarship for OBC Students (PMS-OBC)",
+      "ministry": "Ministry of Social Justice and Empowerment",
+      "category": "education",
+      "benefit": "Course fee + maintenance allowance for post-matric courses for OBC students, paid via DBT.",
+      "summary": "Post-matric scholarship for OBC students; family income from all sources must not exceed ₹2.5 lakh/year (as per current DoSEJ guidelines).",
+      "rules": [
+        {"field": "social_category", "op": "eq", "value": "OBC", "note": "Applicant must belong to OBC category"},
+        {"field": "is_student", "op": "eq", "value": true, "note": "Must be enrolled in a recognised post-matriculation course"},
+        {"field": "annual_income", "op": "lte", "value": 250000, "note": "Family income from all sources ≤ ₹2.5 lakh/year"}
+      ],
+      "application_steps": [
+        "Register on National Scholarship Portal (scholarships.gov.in) → 'New Registration'",
+        "Fill course/institution details; upload OBC caste + income certificate",
+        "Institute and district nodal verification on NSP",
+        "DBT via PFMS to Aadhaar-linked bank account",
+        "Track on NSP portal"
+      ],
+      "docs": ["Caste certificate (OBC)", "Income certificate", "Marksheet", "Bank passbook", "Bonafide certificate"],
+      "sources": [
+        {"name": "NSP — PMS-OBC scheme", "url": "https://scholarships.gov.in"}
+      ]
+    },
+    {
+      "id": "pm-vishwakarma",
+      "name": "PM Vishwakarma",
+      "ministry": "Ministry of Micro, Small and Medium Enterprises + MSDE",
+      "category": "livelihood",
+      "benefit": "Free skilling (₹500/day stipend), ₹15,000 toolkit incentive, collateral-free ₹1L→₹2L (up to ₹3L total) enterprise loans at 5% interest, digital transaction incentive ₹1/transaction.",
+      "summary": "End-to-end support for artisans and craftspeople in 18 traditional trades — recognition + training + toolkit + credit + market linkage.",
+      "rules": [
+        {"field": "is_artisan_or_tradeworker", "op": "eq", "value": true, "note": "Must be working with hands/tools in one of 18 eligible trades (carpenter, blacksmith, potter, tailor, cobbler, barber, goldsmith, etc.)"},
+        {"field": "age", "op": "gte", "value": 18, "note": "Minimum age 18 years on date of registration"},
+        {"field": "rural_or_urban", "op": "in", "value": ["rural", "urban"], "note": "Both rural and urban artisans eligible; unorganised sector, self-employed"}
+      ],
+      "application_steps": [
+        "Register on pmvishwakarma.gov.in portal (self or via CSC)",
+        "Upload trade details + Aadhaar; choose your trade from the 18 listed",
+        "Verification by Gram Panchayat / ULB and district committee",
+        "Complete 5–7 day basic skilling (₹500/day stipend) → toolkit ₹15,000",
+        "After recognition certificate + ID card, apply for ₹1 lakh loan (first tranche) at 5% via bank"
+      ],
+      "docs": ["Aadhaar card", "Bank passbook (Aadhaar-linked)", "Trade proof (photos of work / self-declaration)", "Ration card (optional)"],
+      "sources": [
+        {"name": "PM Vishwakarma portal — pmvishwakarma.gov.in", "url": "https://pmvishwakarma.gov.in"},
+        {"name": "PIB — PM Vishwakarma scheme details", "url": "https://www.pib.gov.in"}
+      ]
+    },
+    {
+      "id": "pm-svanidhi",
+      "name": "PM Street Vendor's Atma Nirbhar Nidhi (PM SVANidhi)",
+      "ministry": "Ministry of Housing and Urban Affairs",
+      "category": "livelihood",
+      "benefit": "Collateral-free working capital loans: ₹10,000 → ₹20,000 → ₹50,000 (progressive), 7% interest subsidy on timely repayment, ₹1,200/year cashback on digital transactions.",
+      "summary": "Affordable micro-credit for urban street vendors/hawkers to resume and grow livelihoods.",
+      "rules": [
+        {"field": "is_street_vendor", "op": "eq", "value": true, "note": "Must be a street vendor/hawker vending in urban areas on or before 24 March 2020 (original) or per current relaxed norms"},
+        {"field": "rural_or_urban", "op": "eq", "value": "urban", "note": "Scheme targets vendors in urban areas (including peri-urban)"},
+        {"field": "age", "op": "gte", "value": 18, "note": "Minimum age 18 years"}
+      ],
+      "application_steps": [
+        "Approach your ULB/municipality for Certificate of Vending (CoV) or Letter of Recommendation (LoR) if vending pre-2020 undocumented",
+        "Apply on pmsvanidhi.mohua.gov.in or via lending institution / CSC",
+        "Provide Aadhaar + bank details; loan sanction in ~30 days",
+        "Repay on time to unlock 2nd (₹20k) and 3rd (₹50k) tranches + 7% subsidy",
+        "UdyamiMitra / ULB help desks for handholding"
+      ],
+      "docs": ["Certificate of Vending / LoR", "Aadhaar card", "Bank passbook"],
+      "sources": [
+        {"name": "PM SVANidhi portal — pmsvanidhi.mohua.gov.in", "url": "https://pmsvanidhi.mohua.gov.in"},
+        {"name": "PIB — PM SVANidhi guidelines", "url": "https://www.pib.gov.in"}
+      ]
+    },
+    {
+      "id": "stand-up-india",
+      "name": "Stand-Up India",
+      "ministry": "Department of Financial Services, Ministry of Finance",
+      "category": "entrepreneurship",
+      "benefit": "Bank loans between ₹10 lakh and ₹1 crore for greenfield enterprises (manufacturing, services, agri-allied, trading), composite loan incl. margin money + working capital.",
+      "summary": "Facilitates loans for at least one SC/ST borrower and one woman borrower per bank branch to set up a greenfield enterprise.",
+      "rules": [
+        {"any_of": [
+          {"field": "social_category", "op": "in", "value": ["SC", "ST"], "note": "At least one SC or ST borrower per branch (for greenfield enterprise)"},
+          {"field": "gender", "op": "eq", "value": "female", "note": "At least one woman borrower per branch"}
+        ], "logic": "at_least_one"},
+        {"field": "age", "op": "gte", "value": 18, "note": "Borrower must be 18+ years"},
+        {"field": "wants_business_loan", "op": "eq", "value": true, "note": "For setting up a NEW (greenfield) enterprise in manufacturing/services/trading/agri-allied"}
+      ],
+      "application_steps": [
+        "Check eligibility & apply via standupmitra.in (SIDBI portal)",
+        "Choose bank branch; portal routes application to the selected bank",
+        "Prepare project report (portal has templates + handholding support)",
+        "Bank appraisal & sanction; composite loan includes term loan + working capital",
+        "Training/support via EDI and LSPs (incubation, skill training)"
+      ],
+      "docs": ["Aadhaar + PAN", "Caste certificate (for SC/ST applicants)", "Project report / business plan", "Address proof", "Bank details"],
+      "sources": [
+        {"name": "Stand-Up Mitra portal — standupmitra.in", "url": "https://www.standupmitra.in"},
+        {"name": "SBI — Stand-Up India scheme page", "url": "https://sbi.bank.in/web/business/sme/sme-government-schemes/sui"}
+      ]
+    },
+    {
+      "id": "atal-pension-yojana",
+      "name": "Atal Pension Yojana (APY)",
+      "ministry": "Ministry of Finance (PFRDA)",
+      "category": "pension",
+      "benefit": "Guaranteed pension ₹1,000–₹5,000/month from age 60 (5 slabs); spouse continues pension on death; nominee gets corpus back.",
+      "summary": "Social security pension for unorganised-sector workers; join between 18–40 years with a bank account; contribution auto-debits till 60.",
+      "rules": [
+        {"field": "age", "op": "range", "value": [18, 40], "note": "Must be 18–40 years at enrolment"},
+        {"field": "bank_account", "op": "eq", "value": true, "note": "Must have a savings bank account (APY is bank-driven)"},
+        {"field": "is_govt_employee", "op": "eq", "value": false, "note": "Open to unorganised-sector workers not covered by statutory social security"}
+      ],
+      "application_steps": [
+        "Visit your bank branch (or use net-banking/mobile app) offering APY",
+        "Fill APY registration form; choose pension slab (₹1,000–₹5,000)",
+        "Ensure Aadhaar + mobile number linked for auto-debit mandate",
+        "Auto-debit starts monthly/quarterly/half-yearly (as chosen) till age 60",
+        "Pension from 60; track via bank / APY portal (npscra.nsdl.co.in)"
+      ],
+      "docs": ["Aadhaar card", "Bank account details", "Mobile number (linked)"],
+      "sources": [
+        {"name": "India Post / PFRDA — APY official page", "url": "https://www.indiapost.gov.in/insurance-services/apy"},
+        {"name": "NSDL APY — npscra.nsdl.co.in", "url": "https://npscra.nsdl.co.in"}
+      ]
+    },
+    {
+      "id": "sukanya-samriddhi",
+      "name": "Sukanya Samriddhi Yojana (SSY)",
+      "ministry": "Ministry of Finance (DEA)",
+      "category": "savings",
+      "benefit": "Highest small-savings interest rate (~8.2% p.a., quarterly revised), EEE tax-exempt, partial withdrawal at 18 for education, maturity at 21 for girl's marriage/studies.",
+      "summary": "Savings account for the girl child — open before she turns 10; deposit ₹250–₹1.5 lakh/year.",
+      "rules": [
+        {"field": "girl_below_10_in_family", "op": "eq", "value": true, "note": "Account can be opened for a girl child below 10 years (max 2 accounts per family, exceptions for twins/triplets)"},
+        {"field": "bank_account", "op": "eq", "value": true, "note": "Open at any post office or authorised bank branch (guardian operates it)"}
+      ],
+      "application_steps": [
+        "Visit nearest post office or authorised bank branch with girl's birth certificate",
+        "Fill SSY account opening form (Form-SSY-1); nominee = guardian details",
+        "Initial deposit ₹250 (minimum); set annual deposits up to ₹1.5 lakh",
+        "Deposits for 15 years; account matures at 21 years from opening",
+        "Partial withdrawal up to 50% at 18 for education; closure for marriage after 18"
+      ],
+      "docs": ["Girl's birth certificate", "Guardian's Aadhaar/PAN + ID", "Address proof", "Photos"],
+      "sources": [
+        {"name": "India Post — Sukanya Samriddhi Account", "url": "https://www.indiapost.gov.in"},
+        {"name": "PIB — SSY interest rate notifications", "url": "https://www.pib.gov.in"}
+      ]
+    },
+    {
+      "id": "pmuy-2-0",
+      "name": "PM Ujjwala Yojana 2.0 (PMUY 2.0)",
+      "ministry": "Ministry of Petroleum and Natural Gas",
+      "category": "energy",
+      "benefit": "Free LPG connection (deposit-free cylinder + regulator + hose) + ₹300/refill DBT subsidy; deposit-free connection per current PMUY rules.",
+      "summary": "Clean cooking fuel for women from poor households (BPL/SC/ST/SECC/ANTYODAYA etc.) — 10.35+ crore connections so far.",
+      "rules": [
+        {"field": "gender", "op": "eq", "value": "female", "note": "Connection is issued in the name of an adult woman of the household"},
+        {"field": "is_bpl", "op": "eq", "value": true, "note": "Women from BPL/SC/ST/PMAY/Antyodaya/SECC households are eligible"},
+        {"field": "age", "op": "gte", "value": 18, "note": "Adult woman (18+)"}
+      ],
+      "application_steps": [
+        "Check eligibility at pmuy.gov.in and locate nearest LPG distributor",
+        "Apply on pmuy.gov.in (Ujjwala 2.0 form) or via distributor/CSC with KYC",
+        "Provide Aadhaar, bank details, ration card/BPL/SECC proof",
+        "Connection issued deposit-free per current rules",
+        "₹300 DBT subsidy per refill to Aadhaar-linked account (up to 12 refills/year cap as applicable)"
+      ],
+      "docs": ["Aadhaar card (woman)", "BPL/ration/SECC/Antyodaya proof", "Bank passbook", "Mobile number"],
+      "sources": [
+        {"name": "PMUY official portal — pmuy.gov.in", "url": "https://pmuy.gov.in"},
+        {"name": "IOCL — PMUY 2.0 details", "url": "https://www.iocl.com"}
+      ]
+    },
+    {
+      "id": "nsap-old-age",
+      "name": "Indira Gandhi National Old Age Pension Scheme (IGNOAPS)",
+      "ministry": "Ministry of Rural Development",
+      "category": "pension",
+      "benefit": "Central assistance ₹200/month (60–79 years) or ₹500/month (80+); states often top up ₹200–₹2,000.",
+      "summary": "Old-age pension for BPL seniors aged 60+; amount credited quarterly via DBT along with state top-ups.",
+      "rules": [
+        {"field": "age", "op": "gte", "value": 60, "note": "Age 60–79 → ₹200/month; 80+ → ₹500/month"},
+        {"field": "is_bpl", "op": "eq", "value": true, "note": "Applicant must belong to a BPL household (as per state BPL list / SECC)"}
+      ],
+      "application_steps": [
+        "Apply to your Block/Municipal office or Gram Panchayat (NSAP application form)",
+        "Submit age proof + BPL proof + bank details",
+        "Sanction by district social welfare officer; pension via DBT (quarterly)",
+        "Track on nsap.nic.in → 'Track Pension' / state portals",
+        "Grievance: state social welfare department or nsap.nic.in helpline"
+      ],
+      "docs": ["Age proof (birth certificate/school certificate/Voter ID)", "BPL ration card", "Bank passbook", "Aadhaar"],
+      "sources": [
+        {"name": "NSAP portal — nsap.nic.in", "url": "https://nsap.nic.in"},
+        {"name": "PIB — NSAP rates", "url": "https://www.pib.gov.in"}
+      ]
+    }
+  ]
+}

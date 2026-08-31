@@ -1,0 +1,21 @@
+{
+  "generated": "2026-09-01",
+  "note": "Official sources for the scheme corpus. Guidance files were authored from these official pages/PDFs and public PIB releases; each guidance file cites its sources at the bottom.",
+  "sources": [
+    {"scheme": "pmay-u-2-0", "name": "IDBI Bank — PMAY-U 2.0 ISS FAQ (official PDF)", "url": "https://www.idbi.bank.in/pdf/FAQ-PMAY-URBAN-2.0-ISS.pdf", "type": "pdf"},
+    {"scheme": "pmay-u-2-0", "name": "PMAY-U official portal FAQ", "url": "https://pmay-urban.gov.in/faq", "type": "page"},
+    {"scheme": "pmay-g", "name": "PMAY-G official portal", "url": "https://pmayg.nic.in", "type": "page"},
+    {"scheme": "ab-pmjay", "name": "NHA beneficiary portal", "url": "https://beneficiary.nha.gov.in", "type": "page"},
+    {"scheme": "pm-kisan", "name": "PM-KISAN Revised Operational Guidelines (official PDF)", "url": "https://pmkisan.gov.in/Documents/RevisedPM-KISANOperationalGuidelines(English).pdf", "type": "pdf"},
+    {"scheme": "pm-kisan", "name": "PIB — PM-KISAN eligibility (PRID 2146932)", "url": "https://pib.gov.in/PressReleasePage.aspx?PRID=2146932", "type": "page"},
+    {"scheme": "pms-sc", "name": "National Scholarship Portal", "url": "https://scholarships.gov.in", "type": "page"},
+    {"scheme": "pms-obc", "name": "National Scholarship Portal", "url": "https://scholarships.gov.in", "type": "page"},
+    {"scheme": "pm-vishwakarma", "name": "PM Vishwakarma official portal", "url": "https://pmvishwakarma.gov.in", "type": "page"},
+    {"scheme": "pm-svanidhi", "name": "PM SVANidhi official microsite", "url": "https://pmsvanidhi.mohua.gov.in", "type": "page"},
+    {"scheme": "stand-up-india", "name": "Stand-Up Mitra portal (SIDBI)", "url": "https://www.standupmitra.in", "type": "page"},
+    {"scheme": "atal-pension-yojana", "name": "India Post — APY", "url": "https://www.indiapost.gov.in/insurance-services/apy", "type": "page"},
+    {"scheme": "sukanya-samriddhi", "name": "India Post — SSY", "url": "https://www.indiapost.gov.in", "type": "page"},
+    {"scheme": "pmuy-2-0", "name": "PMUY official portal", "url": "https://pmuy.gov.in", "type": "page"},
+    {"scheme": "nsap-old-age", "name": "NSAP official portal", "url": "https://nsap.nic.in", "type": "page"}
+  ]
+}
