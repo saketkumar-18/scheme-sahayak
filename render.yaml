@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: scheme-sahayak-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: ALLOWED_ORIGINS
+        sync: false   # set in dashboard: * (public zero-auth read API)
+      - key: LLM_MODEL
+        value: openai
+      - key: RAG_USE_FASTEMBED
+        value: "0"    # BM25-only keeps us well under the 512MB free tier

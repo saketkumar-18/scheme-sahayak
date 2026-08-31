@@ -31,8 +31,12 @@ app = FastAPI(
     version="1.0.0",
 )
 
-_allowed_origins = os.getenv("ALLOWED_ORIGINS", "").strip()
-_origins = [o.strip() for o in _allowed_origins.split(",") if o.strip()] if _allowed_origins else []
+_allowed_env = os.getenv("ALLOWED_ORIGINS", "").strip()
+if _allowed_env == "*":
+    # Public, zero-auth, no-storage API: open CORS is intentional (see ETHICS.md)
+    _origins = ["*"]
+else:
+    _origins = [o.strip() for o in _allowed_env.split(",") if o.strip()] if _allowed_env else []
 _origins += [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
@@ -46,7 +50,10 @@ app.add_middleware(
 )
 
 corpus = SchemeCorpus(DATA_DIR)
-explainer = Explainer(model=os.getenv("LLM_MODEL", "openai"))
+explainer = Explainer(
+    model=os.getenv("LLM_MODEL", "openai"),
+    offline=os.getenv("LLM_OFFLINE", "0") == "1",
+)
 
 
 # ---------------- models ----------------
