@@ -1,0 +1,21 @@
+{
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxDuration": 30,
+        "includeFiles": "backend/app/**,backend/data/**"
+      }
+    },
+    {
+      "src": "static/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/index.py" },
+    { "src": "/assets/(.*)", "dest": "/static/assets/$1" },
+    { "src": "/(.*)", "dest": "/static/index.html" }
+  ]
+}

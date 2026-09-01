@@ -13,10 +13,11 @@ import re
 import urllib.request
 import urllib.error
 import json
+import os
 from typing import Any, Optional
 
 POLLINATIONS_URL = "https://text.pollinations.ai/openai"
-REQUEST_TIMEOUT = float(20)
+REQUEST_TIMEOUT = float(os.getenv("LLM_TIMEOUT", "20"))
 
 SYSTEM_PROMPT = (
     "You are Scheme Sahayak, an assistant that explains Indian government scheme "

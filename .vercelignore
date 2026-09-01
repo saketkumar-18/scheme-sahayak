@@ -1,0 +1,14 @@
+.git
+.github
+backend/.venv
+backend/tests
+backend/.pytest_cache
+**/__pycache__
+frontend
+docs
+README.md
+LICENSE
+Dockerfile
+render.yaml
+.env
+.env.*

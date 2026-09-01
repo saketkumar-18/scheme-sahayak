@@ -19,6 +19,7 @@ dist/
 .env
 .env.*
 !.env.example
+/static/
 
 # OS
 .DS_Store
@@ -26,3 +27,5 @@ Thumbs.db
 
 # Model caches (never commit)
 .cache/
+
+.vercel

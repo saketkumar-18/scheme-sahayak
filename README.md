@@ -2,7 +2,8 @@
 
 **Government Scheme Eligibility Matcher** — enter your profile (income, caste, state, occupation, household) and instantly see exactly which Indian government schemes you qualify for — PMAY-U/G, Ayushman Bharat (PM-JAY), PM-KISAN, Post-Matric Scholarships, PM Vishwakarma, PM SVANidhi, Stand-Up India, Atal Pension, Sukanya Samriddhi, PM Ujjwala 2.0 and NSAP pensions — with **application steps, documents, and official sources** for each.
 
-**Live:** Frontend on Vercel · API on Render (links below)
+**Live:** 🌐 https://scheme-sahayak-khaki.vercel.app (full-stack: React UI + Python API, same origin)
+**Source:** github.com/saketkumar-18/scheme-sahayak
 
 ---
 
@@ -70,8 +71,8 @@ cd backend && pytest tests/ -q
 
 ## Deployment
 
-- **API (Render, free tier):** Docker image, `/api/health` healthcheck, BM25-only (fits 512MB)
-- **Frontend (Vercel):** static build, `VITE_API_URL` baked at build time
+- **Full-stack on Vercel (free):** `api/index.py` (FastAPI ASGI via @vercel/python, BM25-only, data bundled with `includeFiles`) + `static/` (built SPA) behind one domain — no CORS needed. `vercel.json` routes `/api/*` to the function, everything else to the SPA.
+- **Docker/Render (alternative):** Dockerfile + render.yaml provided (deploy needs a payment-verified Render account).
 - CI: GitHub Actions — backend tests, frontend type-check/build, server-boot smoke test
 
 ## Data freshness & disclaimer
