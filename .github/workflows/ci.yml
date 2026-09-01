@@ -67,4 +67,4 @@ jobs:
           pip install -r requirements.txt
           nohup python -m uvicorn app.main:app --port 8000 &
           sleep 5
-          curl -s http://127.0.0.1:8000/api/health | grep -q '"status": "ok"' && echo "boot OK"
+          curl -sf http://127.0.0.1:8000/api/health | grep -Eq '"status": ?"ok"' && echo "boot OK"
